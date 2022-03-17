@@ -22,8 +22,6 @@ function initialize(){
     tiles = document.querySelectorAll('tiles')
 }
 
-
-
 function add_word(word){
     if (last_word_pointer === word_size){
         console.log('Exceed word limit.')
