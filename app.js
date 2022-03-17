@@ -30,7 +30,7 @@ function add_word(word){
         return
     }
     last_word_pointer++
-    target = (last_word_pointer - 1) + (current_row - 1)* word_size
+    const target = (last_word_pointer - 1) + (current_row - 1)* word_size
     // console.log(target)
     const tile_content = tiles[target].firstChild
     tile_content.innerHTML = word
@@ -40,7 +40,7 @@ function add_word(word){
 }
 
 function delete_word(){
-    target = (last_word_pointer - 1) + (current_row - 1)* word_size
+    const target = (last_word_pointer - 1) + (current_row - 1)* word_size
     console.log("del ", last_word_pointer)
     if (last_word_pointer === 0){
         console.log('No more words to delete.')
@@ -52,6 +52,17 @@ function delete_word(){
     last_word_pointer--
 }
 
+function check_word(){
+    if (last_word_pointer < word_size){
+        console.log('Not enough words.')
+        return
+    }
+    let input_word = []
+    for (let i = 0; i < word_size; i++){
+        const target = i + (current_row - 1) * word_size
+        input_word.push(tiles[target].className)
+    }
+}
 
 document.addEventListener('keydown', function(e){
     let keyPressed = e.key
@@ -64,6 +75,12 @@ document.addEventListener('keydown', function(e){
         case 'Backspace':
             delete_word()
             break
+        case 'Enter':
+            check_word()
+            break
     }
     
   }, false);
+
+
+console.log("target is: ", word)
