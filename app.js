@@ -55,10 +55,31 @@ function check_word(){
         console.log('Not enough words.')
         return
     }
-    let input_word = []
+    let input_word = ''
     for (let i = 0; i < word_size; i++){
         const target = i + (current_row - 1) * word_size
-        input_word.push(tiles[target].className)
+        input_word += tiles[target].getAttribute('letter').toLowerCase()
+    }
+    if (input_word === word){
+        console.log('Correct! ')
+        return
+    }
+    if (! (Oa.includes(input_word) || Ma.includes(input_word))){
+        console.log('Not in word list.')
+        return
+    }
+    display_result()
+    if (current_row === chance_limit){
+        console.log('Gameover.')
+        return
+    }
+    current_row++
+    last_word_pointer = 0
+}
+
+function display_result(){
+    for (let i = 0; i < word_size; i++){
+        
     }
 }
 
