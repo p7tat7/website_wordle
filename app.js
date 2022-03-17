@@ -1,10 +1,10 @@
 const word_size = 5
 const chance_limit = 6
 let current_row = 1
-let typing_index = 1
 let last_word_pointer = 0
 
 const grid_display = document.querySelector('#grid')
+let tiles = null
 
 function initialize(){
     for (let i = 0; i < chance_limit; i++) {
@@ -19,11 +19,10 @@ function initialize(){
             blank.appendChild(tile_content)
         }
     }
+    tiles = document.querySelectorAll('tiles')
 }
 
-initialize()
 
-const tiles = document.querySelectorAll('tiles')
 
 function add_word(word){
     if (last_word_pointer === word_size){
@@ -55,11 +54,10 @@ function delete_word(){
 
 
 document.addEventListener('keydown', function(e){
-    var keyPressed = e.key
+    let keyPressed = e.key
     if (keyPressed.length === 1){
         if (keyPressed.toUpperCase().charCodeAt(0) >= 65 && e.key.toUpperCase().charCodeAt(0) <= 90){
             add_word(keyPressed.toUpperCase())
-            console.log('added')
         }
     }
     switch (keyPressed){
