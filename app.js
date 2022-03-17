@@ -33,13 +33,10 @@ function add_word(word){
     const tile_content = tiles[target].firstChild
     tile_content.innerHTML = word
     tiles[target].setAttribute('letter', word)
-    console.log('typed ', word, 'at ', target)
-    console.log('last word ', last_word_pointer)
 }
 
 function delete_word(){
     const target = (last_word_pointer - 1) + (current_row - 1)* word_size
-    console.log("del ", last_word_pointer)
     if (last_word_pointer === 0){
         console.log('No more words to delete.')
         return
@@ -55,20 +52,21 @@ function check_word(){
         console.log('Not enough words.')
         return
     }
-    let input_word = ''
+    var input_word = ''
     for (let i = 0; i < word_size; i++){
         const target = i + (current_row - 1) * word_size
         input_word += tiles[target].getAttribute('letter').toLowerCase()
     }
-    if (input_word === word){
+    if (input_word === answer){
         console.log('Correct! ')
+        display_result(input_word)
         return
     }
     if (! (Oa.includes(input_word) || Ma.includes(input_word))){
         console.log('Not in word list.')
         return
     }
-    display_result()
+    display_result(input_word)
     if (current_row === chance_limit){
         console.log('Gameover.')
         return
@@ -77,10 +75,19 @@ function check_word(){
     last_word_pointer = 0
 }
 
-function display_result(){
+function display_result(input_word){
     for (let i = 0; i < word_size; i++){
-        console.log(i)
-        
+        const target = i + (current_row - 1) * word_size
+        let character = input_word[i]
+        if (character === answer[i]){
+            tiles[target].setAttribute('result', 'exact')
+        }
+        else if (answer.includes(character)){
+            tiles[target].setAttribute('result', 'include')
+        }
+        else{
+            tiles[target].setAttribute('result', 'wrong')
+        }
     }
 }
 
@@ -103,4 +110,4 @@ document.addEventListener('keydown', function(e){
   }, false);
 
 
-console.log("target is: ", word)
+console.log("target is: ", answer)

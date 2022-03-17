@@ -27,6 +27,18 @@ tiles {
     font-size: 25px;
 }
 
+tiles[result=include] {
+    background-color: rgb(238, 219, 115);
+}
+
+tiles[result=exact] {
+    background-color: lawngreen;
+}
+
+tiles[result=wrong] {
+    background-color: grey;
+}
+
 game-row {
     width: 292px;
     height: 56px;
