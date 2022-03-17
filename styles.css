@@ -21,7 +21,6 @@ tiles {
     border-color: rgb(73, 73, 73);
     font-family: Impact, fantasy;
     color:azure;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
