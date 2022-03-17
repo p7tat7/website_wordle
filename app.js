@@ -79,6 +79,7 @@ function check_word(){
 
 function display_result(){
     for (let i = 0; i < word_size; i++){
+        console.log(i)
         
     }
 }
