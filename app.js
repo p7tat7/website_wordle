@@ -4,7 +4,43 @@ let current_row = 1
 let last_word_pointer = 0
 
 const grid_display = document.querySelector('#grid')
+const keyboard_row1_display = document.querySelector('#rowOfKeyboard1')
+const keyboard_row2_display = document.querySelector('#rowOfKeyboard2')
+const keyboard_row3_display = document.querySelector('#rowOfKeyboard3')
 let tiles = null
+
+function createKeyboard() {
+    for (let i =0; i < 28; i++){
+        
+        let keyButton = document.createElement("button")
+        keyButton.innerHTML = letterAToZ[i]
+        keyButton.setAttribute('class', 'keyboard_tiles')
+
+        if (i == 19){
+            keyButton.onclick = function() {check_word()}
+        }
+        else if (i == 27){
+            keyButton.onclick = function() {delete_word()}
+        }
+        else {
+            keyButton.onclick = function() {add_word(letterAToZ[i].toUpperCase())}
+        }
+        
+        if (i <10) {
+            keyboard_row1_display.appendChild(keyButton)
+        }
+        
+        else if (i >= 10 && i <20){
+            keyboard_row2_display.appendChild(keyButton)
+        }
+
+        else {
+            keyboard_row3_display.appendChild(keyButton)
+        }
+        
+    }
+    
+}
 
 function initialize(){
     for (let i = 0; i < chance_limit; i++) {
@@ -20,6 +56,8 @@ function initialize(){
         }
     }
     tiles = document.querySelectorAll('tiles')
+
+    createKeyboard()
 }
 
 function add_word(word){
