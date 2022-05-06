@@ -76,16 +76,33 @@ function check_word(){
 }
 
 function display_result(input_word){
+    let remain = []
+    let input_color = []
+    for (let i = 0; i < word_size; i++){
+        remain[i] = answer[i]
+        input_color[i] = 0
+    }
     for (let i = 0; i < word_size; i++){
         const target = i + (current_row - 1) * word_size
         let character = input_word[i]
         if (character === answer[i]){
             tiles[target].setAttribute('result', 'exact')
+            remain[i] = "."
+            input_color[i] = 1
+            console.log("True remain: "+ remain)
         }
-        else if (answer.includes(character)){
+    }
+    for (let i = 0; i < word_size; i++){
+        const target = i + (current_row - 1) * word_size
+        let character = input_word[i]
+        if (remain.includes(character)){
             tiles[target].setAttribute('result', 'include')
+            console.log("index: " + remain.indexOf(character))
+            remain[remain.indexOf(character)] = "."
+            console.log("remain: " + remain)
+            input_color[i] = 2
         }
-        else{
+        else if(input_color[i] === 0){
             tiles[target].setAttribute('result', 'wrong')
         }
     }
